@@ -32,6 +32,7 @@ class Webservice(implicit fm: Materializer, system: ActorSystem) extends Directi
         // so that's where we pick them up
         path("frontend-launcher.js")(getFromResource("frontend-launcher.js")) ~
         path("frontend-fastopt.js")(getFromResource("frontend-fastopt.js")) ~
+        path("frontend-jsdeps.min.js")(getFromResource("frontend-jsdeps.min.js")) ~
         path("chat") {
           parameter('name) { name ⇒
             handleWebSocketMessages(websocketChatFlow(sender = name))

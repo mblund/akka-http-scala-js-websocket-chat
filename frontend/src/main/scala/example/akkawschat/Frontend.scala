@@ -1,5 +1,6 @@
 package example.akkawschat
 
+import japgolly.scalajs.react.ReactDOM
 import org.scalajs.dom.raw._
 
 import scala.scalajs.js
@@ -9,11 +10,15 @@ import upickle._
 import shared.Protocol
 
 object Frontend extends js.JSApp {
+
   val joinButton = dom.document.getElementById("join").asInstanceOf[HTMLButtonElement]
   val sendButton = dom.document.getElementById("send").asInstanceOf[HTMLButtonElement]
 
   def main(): Unit = {
     val nameField = dom.document.getElementById("name").asInstanceOf[HTMLInputElement]
+
+    ReactDOM.render(Components.Hello("Magnus"), dom.document.getElementById("test"))
+
     joinButton.onclick = { (event: MouseEvent) ⇒
       joinChat(nameField.value)
       event.preventDefault()
@@ -31,6 +36,7 @@ object Frontend extends js.JSApp {
     joinButton.disabled = true
     val playground = dom.document.getElementById("playground")
     playground.innerHTML = s"Trying to join chat as '$name'..."
+
     val chat = new WebSocket(getWebsocketUri(dom.document, name))
     chat.onopen = { (event: Event) ⇒
       playground.insertBefore(p("Chat connection was successful!"), playground.firstChild)
