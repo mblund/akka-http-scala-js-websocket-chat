@@ -2,6 +2,7 @@ package example.akkawschat
 
 import japgolly.scalajs.react.ReactDOM
 import org.scalajs.dom.raw._
+import rx.{ Var, Rx }
 
 import scala.scalajs.js
 import org.scalajs.dom
@@ -17,8 +18,6 @@ object Frontend extends js.JSApp {
   def main(): Unit = {
     val nameField = dom.document.getElementById("name").asInstanceOf[HTMLInputElement]
 
-    ReactDOM.render(Components.Hello("Magnus"), dom.document.getElementById("test"))
-
     joinButton.onclick = { (event: MouseEvent) ⇒
       joinChat(nameField.value)
       event.preventDefault()
@@ -33,6 +32,10 @@ object Frontend extends js.JSApp {
   }
 
   def joinChat(name: String): Unit = {
+    val data = 1.to(900).map(x ⇒ new Var[Boolean](false)).toVector
+    val table = Components2.Table.Component(Components2.Table.Props(30, data))
+    ReactDOM.render(table, dom.document.getElementById("test"))
+
     joinButton.disabled = true
     val playground = dom.document.getElementById("playground")
     playground.innerHTML = s"Trying to join chat as '$name'..."

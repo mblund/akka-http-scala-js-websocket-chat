@@ -28,8 +28,10 @@ object ChatBuild extends Build {
         libraryDependencies ++= Seq(
           "org.scala-js" %%% "scalajs-dom" % "0.9.0",
           "com.github.japgolly.scalajs-react" %%% "core" % "0.11.1",
+          "com.github.japgolly.scalajs-react" %%% "extra" % "0.11.1",
           "com.lihaoyi" %%% "upickle" % "0.2.8",
-          "com.lihaoyi" %%% "utest" % "0.3.0" % "test"
+          "com.lihaoyi" %%% "utest" % "0.3.0" % "test",
+          "com.lihaoyi" %%% "scalarx" % "0.3.1"
         ),
         // React JS itself (Note the filenames, adjust as needed, eg. to remove addons.)
         jsDependencies ++= Seq(
